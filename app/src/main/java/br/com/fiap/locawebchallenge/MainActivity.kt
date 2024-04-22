@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val navController = rememberNavController()
                     NavHost(navController = navController, startDestination = "home", builder = {
-                        composable("home"){
+                        composable("home") {
                             HomeView()
                         }
                     })
