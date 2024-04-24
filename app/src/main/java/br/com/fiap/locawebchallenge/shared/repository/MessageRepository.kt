@@ -12,11 +12,11 @@ class MessageRepository(context: Context) {
         db.sendMessage(message)
     }
 
-    fun getMessagesReceived(recipient: User): Array<Message> {
+    fun getMessagesReceived(recipient: String): Array<Message> {
         return db.getMessagesReceived(recipient)
     }
 
-    fun getMessagesSent(sender: User): Array<Message> {
+    fun getMessagesSent(sender: String): Array<Message> {
         return db.getMessagesSent(sender)
     }
 }

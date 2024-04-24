@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "tbl_message")
 data class Message(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
-    val recipient: User,
-    val sender: User,
+    val recipient: String,
+    val sender: String,
     val message: String = ""
 )
