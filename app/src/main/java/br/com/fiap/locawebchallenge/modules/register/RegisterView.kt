@@ -18,6 +18,7 @@ import br.com.fiap.locawebchallenge.shared.composables.TitleBanner
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import br.com.fiap.locawebchallenge.R
 import br.com.fiap.locawebchallenge.shared.composables.DefaultBtn
@@ -104,7 +105,8 @@ fun RegisterView(navController: NavController, viewModel: RegisterViewModel) {
             })
             Text(
                 text = formError, style = Typography.labelSmall,
-                color = colorResource(id = R.color.secondary)
+                color = colorResource(id = R.color.secondary),
+                textAlign = TextAlign.Center
             )
         }
     }
