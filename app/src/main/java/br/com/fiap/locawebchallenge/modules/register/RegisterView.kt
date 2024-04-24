@@ -1,5 +1,6 @@
 package br.com.fiap.locawebchallenge.modules.register
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -82,14 +83,23 @@ fun RegisterView(navController: NavController, viewModel: RegisterViewModel) {
             )
             Spacer(modifier = Modifier.height(32.dp))
             DefaultBtn(title = "Entrar", onClick = {
+                Log.i("TESTE", viewModel.emailValidator())
+                Log.i("TESTE", viewModel.emailValidationValidator())
+                Log.i("TESTE", viewModel.passwordValidationValidator())
                 if (email == "" || emailValidation == "" || name == "" || password == "" || passwordValidation == "") {
                     viewModel.setFormError("Os campos são obrigatórios")
                 } else if (viewModel.emailValidator() != "" || viewModel.emailValidationValidator() != "" || viewModel.passwordValidationValidator() != "") {
-                    //repo.createUser(User(email = email, name = name, password = encrypter(password)))
-                    navController.navigate("home")
+                    Log.i("TESTE", "ENTROU AQUI")
                     viewModel.setFormError("")
                 } else {
+                    try {
+                    Log.i("TESTE", "ENTROU AQUI")
+                    repo.createUser(User(email = email, name = name, password = encrypter(password)))
+                    navController.navigate("home")
                     viewModel.setFormError("")
+                    }catch (e: Exception) {
+                        viewModel.setFormError("Erro ao criar usuário: ${e.message}")
+                    }
                 }
             })
             Text(
