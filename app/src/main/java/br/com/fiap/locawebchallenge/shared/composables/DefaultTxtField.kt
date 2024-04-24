@@ -13,6 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import br.com.fiap.locawebchallenge.R
@@ -20,27 +22,39 @@ import br.com.fiap.locawebchallenge.ui.theme.Typography
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DefaultTxtField(title: String, keyboardType: KeyboardType, onValueChange: (String) -> Unit, value: String, error: String = "") {
+fun DefaultTxtField(
+    title: String,
+    keyboardType: KeyboardType,
+    onValueChange: (String) -> Unit,
+    value: String,
+    error: String = ""
+) {
     Column {
-        OutlinedTextField(value = value,
+        OutlinedTextField(
+            value = value,
             onValueChange = onValueChange,
-            colors = TextFieldDefaults.textFieldColors(textColor = colorResource(R.color.primary),
+            colors = TextFieldDefaults.textFieldColors(
+                textColor = colorResource(R.color.primary),
                 containerColor = colorResource(R.color.white)
             ),
             shape = RoundedCornerShape(4.dp),
             placeholder = {
-                Text(text = title,
+                Text(
+                    text = title,
                     style = Typography.bodyLarge,
                     color = colorResource(R.color.primary)
                 )
             },
             isError = value.isNotEmpty() && error != "",
             modifier = Modifier.width(340.dp),
-            keyboardOptions = KeyboardOptions(keyboardType = keyboardType)
+            keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
+            visualTransformation = if (keyboardType == KeyboardType.Password) PasswordVisualTransformation() else VisualTransformation.None
         )
-        if(error != ""){
-            Text(text = error, style = Typography.labelSmall,
-                color = colorResource(id = R.color.secondary))
+        if (error != "") {
+            Text(
+                text = error, style = Typography.labelSmall,
+                color = colorResource(id = R.color.secondary),
+            )
         }
     }
 
