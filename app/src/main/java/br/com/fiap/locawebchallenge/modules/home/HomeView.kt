@@ -4,21 +4,27 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.Button
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import br.com.fiap.locawebchallenge.R
+import br.com.fiap.locawebchallenge.shared.composables.DefaultBtn
 import br.com.fiap.locawebchallenge.shared.composables.Header
+import br.com.fiap.locawebchallenge.shared.composables.TitleBanner
 import br.com.fiap.locawebchallenge.ui.theme.Typography
 
 @Composable
-fun HomeView() {
+fun HomeView(navController: NavController) {
     Box {
         Column {
             Header(isLogged = false)
@@ -29,37 +35,17 @@ fun HomeView() {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Box(
-                    Modifier.background(color = Color(R.color.gray))
-                ) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                    ) {
-                        Text(
-                            text = "Segurança, customização e organização",
-                            style = Typography.bodyLarge,
-                            textAlign = TextAlign.Center
-                        )
-                        Text(
-                            text = "Bem-vindo ao LocaMail",
-                            style = Typography.titleLarge,
-                            textAlign = TextAlign.Center
-                        )
-                    }
+                TitleBanner(title = "Bem-vindo ao LocaMail", subTitle = "Segurança, customização e organização")
+                Spacer(Modifier.height(24.dp))
+                DefaultBtn(title = "Entrar", onClick = {})
+                TextButton(onClick = { navController.navigate("register") }, Modifier.height(32.dp)) {
+                    Text(
+                        text = "Criar conta",
+                        style = Typography.labelSmall,
+                        textAlign = TextAlign.Center,
+                        color = colorResource(id = R.color.secondary)
+                    )
                 }
-                Button(onClick = { /*TODO*/ }) {
-                    Box() {
-                        Text(
-                            text = "Crie a sua conta",
-                            style = Typography.bodyLarge,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-                Text(text = "Entrar", style = Typography.labelSmall, textAlign = TextAlign.Center)
             }
         }
     }
