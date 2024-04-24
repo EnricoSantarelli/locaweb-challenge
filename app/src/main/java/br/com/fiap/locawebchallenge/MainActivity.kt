@@ -11,6 +11,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.locawebchallenge.modules.home.HomeView
+import br.com.fiap.locawebchallenge.modules.register.RegisterView
+import br.com.fiap.locawebchallenge.modules.register.RegisterViewModel
 import br.com.fiap.locawebchallenge.ui.theme.LocawebChallengeTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,7 +27,10 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     NavHost(navController = navController, startDestination = "home", builder = {
                         composable("home") {
-                            HomeView()
+                            HomeView(navController)
+                        }
+                        composable("register") {
+                            RegisterView(navController, viewModel = RegisterViewModel())
                         }
                     })
                 }
