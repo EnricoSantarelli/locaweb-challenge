@@ -1,11 +1,15 @@
 package br.com.fiap.locawebchallenge.shared.db
 
 import android.content.Context
+import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import br.com.fiap.locawebchallenge.shared.dao.MessageDAO
 import br.com.fiap.locawebchallenge.shared.dao.UserDAO
+import br.com.fiap.locawebchallenge.shared.models.Message
+import br.com.fiap.locawebchallenge.shared.models.User
 
+@Database(entities = [Message::class, User::class], version = 1)
 abstract class SQLiteDb : RoomDatabase() {
     abstract fun messageDAO(): MessageDAO
     abstract fun userDAO(): UserDAO
@@ -18,7 +22,7 @@ abstract class SQLiteDb : RoomDatabase() {
                 instance = Room.databaseBuilder(
                     context,
                     SQLiteDb::class.java,
-                    "message_db"
+                    "locaweb_db"
                 ).allowMainThreadQueries().fallbackToDestructiveMigration().build()
             }
             return instance
