@@ -16,7 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import br.com.fiap.locawebchallenge.R
@@ -61,7 +61,7 @@ fun Header(isLogged: Boolean) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(2.dp)
-                    .background(color = Color(R.color.gray))
+                    .background(color = colorResource(R.color.gray))
             )
         }
     }
