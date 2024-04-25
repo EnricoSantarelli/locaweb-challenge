@@ -35,7 +35,8 @@ fun DefaultTxtField(
             onValueChange = onValueChange,
             colors = TextFieldDefaults.textFieldColors(
                 textColor = colorResource(R.color.primary),
-                containerColor = colorResource(R.color.white)
+                containerColor = colorResource(R.color.white),
+                focusedIndicatorColor = colorResource(R.color.primary)
             ),
             shape = RoundedCornerShape(4.dp),
             placeholder = {
