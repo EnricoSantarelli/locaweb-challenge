@@ -12,4 +12,7 @@ interface UserDAO {
 
     @Query("SELECT * FROM tbl_user")
     fun getAllUsers(): Array<User>
+
+    @Query("SELECT * FROM tbl_user WHERE email = :email AND password = :password")
+    fun getUser(email: String, password: String): User
 }

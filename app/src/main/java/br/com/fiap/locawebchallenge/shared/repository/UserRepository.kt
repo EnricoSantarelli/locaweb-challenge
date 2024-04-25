@@ -14,4 +14,8 @@ class UserRepository(context: Context) {
     fun getAllUsers(): Array<User> {
         return db.getAllUsers()
     }
+
+    fun getUser(email: String, password: String): User {
+        return db.getUser(email, password)
+    }
 }
