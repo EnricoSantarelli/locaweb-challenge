@@ -84,17 +84,12 @@ fun RegisterView(navController: NavController, viewModel: RegisterViewModel) {
             )
             Spacer(modifier = Modifier.height(32.dp))
             DefaultBtn(title = "Entrar", onClick = {
-                Log.i("TESTE", viewModel.emailValidator())
-                Log.i("TESTE", viewModel.emailValidationValidator())
-                Log.i("TESTE", viewModel.passwordValidationValidator())
                 if (email == "" || emailValidation == "" || name == "" || password == "" || passwordValidation == "") {
                     viewModel.setFormError("Os campos são obrigatórios")
                 } else if (viewModel.emailValidator() != "" || viewModel.emailValidationValidator() != "" || viewModel.passwordValidationValidator() != "") {
-                    Log.i("TESTE", "ENTROU AQUI")
                     viewModel.setFormError("")
                 } else {
                     try {
-                    Log.i("TESTE", "ENTROU AQUI")
                     repo.createUser(User(email = email, name = name, password = encrypter(password)))
                     navController.navigate("home")
                     viewModel.setFormError("")

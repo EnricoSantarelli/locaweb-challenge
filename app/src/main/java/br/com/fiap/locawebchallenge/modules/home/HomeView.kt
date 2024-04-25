@@ -37,7 +37,7 @@ fun HomeView(navController: NavController) {
             ) {
                 TitleBanner(title = "Bem-vindo ao LocaMail", subTitle = "Segurança, customização e organização")
                 Spacer(Modifier.height(24.dp))
-                DefaultBtn(title = "Entrar", onClick = {})
+                DefaultBtn(title = "Entrar", onClick = {navController.navigate("login")})
                 TextButton(onClick = { navController.navigate("register") }, Modifier.height(32.dp)) {
                     Text(
                         text = "Criar conta",

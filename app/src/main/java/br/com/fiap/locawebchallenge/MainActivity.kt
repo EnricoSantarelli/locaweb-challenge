@@ -11,6 +11,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import br.com.fiap.locawebchallenge.modules.home.HomeView
+import br.com.fiap.locawebchallenge.modules.login.LoginView
+import br.com.fiap.locawebchallenge.modules.login.LoginViewModel
 import br.com.fiap.locawebchallenge.modules.register.RegisterView
 import br.com.fiap.locawebchallenge.modules.register.RegisterViewModel
 import br.com.fiap.locawebchallenge.ui.theme.LocawebChallengeTheme
@@ -31,6 +33,9 @@ class MainActivity : ComponentActivity() {
                         }
                         composable("register") {
                             RegisterView(navController, viewModel = RegisterViewModel())
+                        }
+                        composable("login"){
+                            LoginView(navController, viewModel = LoginViewModel())
                         }
                     })
                 }
