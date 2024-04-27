@@ -64,8 +64,10 @@ fun LoginView(navController: NavController, viewModel: LoginViewModel) {
                         if(user == null){
                             viewModel.setError("Usuário não encontrado")
                         } else {
-                            navController.navigate("home")
-                        }                    } catch (e: Exception) {
+                            Log.i("ID", user.id.toString())
+                            navController.navigate("mails/" + user.id)
+                        }
+                    } catch (e: Exception) {
                         if(e.message != null){
                             viewModel.setError(e.message!!)
                         }

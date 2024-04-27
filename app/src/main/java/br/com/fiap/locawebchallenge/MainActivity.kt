@@ -13,6 +13,8 @@ import androidx.navigation.compose.rememberNavController
 import br.com.fiap.locawebchallenge.modules.home.HomeView
 import br.com.fiap.locawebchallenge.modules.login.LoginView
 import br.com.fiap.locawebchallenge.modules.login.LoginViewModel
+import br.com.fiap.locawebchallenge.modules.mails.MailsView
+import br.com.fiap.locawebchallenge.modules.mails.MailsViewModel
 import br.com.fiap.locawebchallenge.modules.register.RegisterView
 import br.com.fiap.locawebchallenge.modules.register.RegisterViewModel
 import br.com.fiap.locawebchallenge.ui.theme.LocawebChallengeTheme
@@ -36,6 +38,10 @@ class MainActivity : ComponentActivity() {
                         }
                         composable("login"){
                             LoginView(navController, viewModel = LoginViewModel())
+                        }
+                        composable("mails/{id}",){
+                            val id= it.arguments?.getInt("id")
+                            MailsView(navController, viewModel = MailsViewModel(), id!!)
                         }
                     })
                 }

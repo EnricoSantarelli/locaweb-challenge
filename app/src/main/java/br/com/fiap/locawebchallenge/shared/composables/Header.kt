@@ -23,7 +23,7 @@ import br.com.fiap.locawebchallenge.R
 import br.com.fiap.locawebchallenge.ui.theme.Typography
 
 @Composable
-fun Header(isLogged: Boolean) {
+fun Header(isLogged: Boolean, screenIndex: Int = 0) {
     Box {
         Column(modifier = Modifier.padding(horizontal = 16.dp)) {
             Row(
@@ -43,13 +43,13 @@ fun Header(isLogged: Boolean) {
                     horizontalArrangement = Arrangement.End,
                 ) {
                     if (isLogged) {
-                        Text(text = "Entrada", style = Typography.bodyLarge)
+                        Text(text = "Entrada", style = Typography.bodyLarge, color = colorResource(id = if(screenIndex == 1) R.color.secondary else R.color.primary))
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text(text = "Enviados", style = Typography.bodyLarge)
+                        Text(text = "Enviados", style = Typography.bodyLarge, color = colorResource(id = if(screenIndex == 2) R.color.secondary else R.color.primary))
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text(text = "Span", style = Typography.bodyLarge)
+                        Text(text = "Span", style = Typography.bodyLarge, color = colorResource(id = if(screenIndex == 3) R.color.secondary else R.color.primary))
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text(text = "Excluídos", style = Typography.bodyLarge)
+                        Text(text = "Excluídos", style = Typography.bodyLarge, color = colorResource(id = if(screenIndex == 4) R.color.secondary else R.color.primary))
                     }
                 }
             }

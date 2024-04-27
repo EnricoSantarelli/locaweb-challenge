@@ -19,4 +19,8 @@
         fun getUser(email: String, password: String): User {
             return db.getUser(email, password)
         }
+
+        fun getUserById(id: Int): User {
+            return db.getUserById(id)
+        }
     }
