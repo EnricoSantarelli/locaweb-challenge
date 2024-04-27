@@ -8,5 +8,6 @@ data class Message(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val recipient: String,
     val sender: String,
-    val message: String = ""
+    val message: String = "",
+    val date: Long
 )

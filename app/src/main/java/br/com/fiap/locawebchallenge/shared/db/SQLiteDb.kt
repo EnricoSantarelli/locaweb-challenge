@@ -9,7 +9,7 @@ import br.com.fiap.locawebchallenge.shared.dao.UserDAO
 import br.com.fiap.locawebchallenge.shared.models.Message
 import br.com.fiap.locawebchallenge.shared.models.User
 
-@Database(entities = [Message::class, User::class], version = 1)
+@Database(entities = [Message::class, User::class], version = 3)
 abstract class SQLiteDb : RoomDatabase() {
     abstract fun messageDAO(): MessageDAO
     abstract fun userDAO(): UserDAO
