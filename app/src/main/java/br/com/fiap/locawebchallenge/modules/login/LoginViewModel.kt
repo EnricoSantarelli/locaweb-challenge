@@ -18,4 +18,11 @@ class LoginViewModel : ViewModel() {
     fun setPassword(value: String){
         _password.value = value
     }
+
+    private val _error = MutableLiveData<String>("")
+    val error : LiveData<String> = _error
+
+    fun setError(value: String){
+        _error.value = value
+    }
 }

@@ -50,10 +50,6 @@ fun Header(isLogged: Boolean) {
                         Text(text = "Span", style = Typography.bodyLarge)
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(text = "Excluídos", style = Typography.bodyLarge)
-                    } else {
-                        Text(text = "Entrar", style = Typography.bodyLarge)
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(text = "Criar", style = Typography.bodyLarge)
                     }
                 }
             }
