@@ -10,6 +10,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import br.com.fiap.locawebchallenge.modules.creation.CreationView
+import br.com.fiap.locawebchallenge.modules.creation.CreationViewModel
 import br.com.fiap.locawebchallenge.modules.home.HomeView
 import br.com.fiap.locawebchallenge.modules.login.LoginView
 import br.com.fiap.locawebchallenge.modules.login.LoginViewModel
@@ -39,9 +42,17 @@ class MainActivity : ComponentActivity() {
                         composable("login"){
                             LoginView(navController, viewModel = LoginViewModel())
                         }
-                        composable("mails/{id}",){
-                            val id= it.arguments?.getInt("id")
+                        composable("mails?id={id}", arguments = listOf(navArgument(name = "id") {
+                            defaultValue = 0
+                        })){
+                            val id = it.arguments?.getInt("id")
                             MailsView(navController, viewModel = MailsViewModel(), id!!)
+                        }
+                        composable("creation?id={id}", arguments = listOf(navArgument(name = "id") {
+                            defaultValue = 0
+                        })) {
+                            val id= it.arguments?.getInt("id")
+                            CreationView(navController, viewModel = CreationViewModel(), id!!)
                         }
                     })
                 }
