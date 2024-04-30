@@ -51,11 +51,6 @@ fun MailsView(navController: NavController, viewModel: MailsViewModel, id: Int) 
             Header(isLogged = true, screenIndex = 1)
             Spacer(modifier = Modifier.height(16.dp))
             TitleBanner(title = "Caixa de entrada")
-            MailCard(
-                sender = "enricosantarelli@hotmail.com",
-                message = "On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.",
-                date = 1714252166133
-            )
             if (messages.value != null && messages.value!!.isNotEmpty()) {
                 messages.value!!.forEach {
                     MailCard(sender = it.sender, message = it.message, date = it.date)
@@ -69,7 +64,8 @@ fun MailsView(navController: NavController, viewModel: MailsViewModel, id: Int) 
                 )
             }
         }
-        FloatingActionButton(onClick = { /*TODO*/ }, modifier = Modifier
+        FloatingActionButton(onClick = {
+            navController.navigate("creation?id=$id") }, modifier = Modifier
             .align(Alignment.BottomEnd)
             .padding(16.dp),
             containerColor = colorResource(id = R.color.primary)
