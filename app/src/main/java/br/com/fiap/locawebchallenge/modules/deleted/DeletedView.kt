@@ -59,7 +59,9 @@ fun DeletedView(navController: NavController, viewModel: DeletedViewModel, id: I
                         date = it.date,
                         wasRead = it.wasRead,
                         id = it.id,
-                        navController= navController
+                        navController= navController,
+                        user = user,
+                        recipient = it.recipient
                     )
                 }
             } else {

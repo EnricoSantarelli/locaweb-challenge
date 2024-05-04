@@ -1,5 +1,7 @@
 package br.com.fiap.locawebchallenge.shared.composables
 
+import android.os.IBinder.DeathRecipient
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,13 +17,18 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import br.com.fiap.locawebchallenge.R
+import br.com.fiap.locawebchallenge.shared.models.User
+import br.com.fiap.locawebchallenge.shared.repository.MessageRepository
+import br.com.fiap.locawebchallenge.shared.repository.UserRepository
 import br.com.fiap.locawebchallenge.shared.utils.getDate
 import br.com.fiap.locawebchallenge.ui.theme.Typography
 
@@ -29,17 +36,30 @@ import br.com.fiap.locawebchallenge.ui.theme.Typography
 @Composable
 fun MailCard(
     sender: String,
+    recipient: String,
     message: String,
     date: Long,
     wasRead: Boolean,
     id: Long,
-    navController: NavController
+    navController: NavController,
+    user: User
 ) {
 
     val date = getDate(date, "dd/MM/yyyy hh:mm:ss.SSS")
+
+    val context = LocalContext.current
+    val messagesRepo = MessageRepository(context)
+
     Surface(
         onClick = {
-            navController.navigate("mail?id=$id")
+            try {
+                if(recipient == user.email){
+                    messagesRepo.visualize(id)
+                }
+                navController.navigate("mail?id=$id")
+            } catch (e: Exception) {
+                Log.i("Error", e.message!!)
+            }
         }
     ) {
         Box(

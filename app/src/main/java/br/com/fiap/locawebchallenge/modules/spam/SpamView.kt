@@ -58,7 +58,9 @@ fun SpamView(navController: NavController, viewModel: SpamViewModel, id: Int) {
                         date = it.date,
                         wasRead = it.wasRead,
                         id = it.id,
-                        navController= navController
+                        navController= navController,
+                        user = user,
+                        recipient = it.recipient
                     )
                 }
             } else {

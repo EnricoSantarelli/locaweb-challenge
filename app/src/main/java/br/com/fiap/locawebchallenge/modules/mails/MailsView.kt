@@ -59,7 +59,9 @@ fun MailsView(navController: NavController, viewModel: MailsViewModel, id: Int) 
                         date = it.date,
                         wasRead = it.wasRead,
                         id = it.id,
-                        navController= navController
+                        navController= navController,
+                        user = user,
+                        recipient = it.recipient
                     )
                 }
             } else {

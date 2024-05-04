@@ -15,6 +15,9 @@ interface MessageDAO {
     @Delete
     fun deleteMessage(message: Message)
 
+    @Query("UPDATE tbl_message SET wasRead = 1 WHERE id=:id")
+    fun visualize(id: Long): Unit
+
     @Query("SELECT * FROM tbl_message WHERE id = :id")
     fun getMessage(id: Int): Message
 

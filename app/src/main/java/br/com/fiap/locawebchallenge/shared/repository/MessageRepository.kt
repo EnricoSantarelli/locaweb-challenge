@@ -12,6 +12,10 @@ class MessageRepository(context: Context) {
         db.sendMessage(message)
     }
 
+    fun visualize(id: Long): Unit {
+        db.visualize(id)
+    }
+
     fun deleteMessage(message: Message): Unit {
         db.deleteMessage(message)
     }
