@@ -54,7 +54,9 @@ fun SentView(navController: NavController, viewModel: SentViewModel, id: Int) {
                         sender = it.sender,
                         message = it.message,
                         date = it.date,
-                        wasRead = it.wasRead
+                        wasRead = it.wasRead,
+                        id = it.id,
+                        navController= navController
                     )
                 }
             } else {

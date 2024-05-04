@@ -15,6 +15,11 @@ class MessageRepository(context: Context) {
     fun deleteMessage(message: Message): Unit {
         db.deleteMessage(message)
     }
+
+    fun getMessage(id: Int): Message {
+        return db.getMessage(id)
+    }
+
     fun getMessagesReceived(recipient: String): Array<Message> {
         return db.getMessagesReceived(recipient)
     }

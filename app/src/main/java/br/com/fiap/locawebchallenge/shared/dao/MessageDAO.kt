@@ -15,6 +15,9 @@ interface MessageDAO {
     @Delete
     fun deleteMessage(message: Message)
 
+    @Query("SELECT * FROM tbl_message WHERE id = :id")
+    fun getMessage(id: Int): Message
+
     @Query("SELECT * FROM tbl_message WHERE recipient = :recipient AND status = 'MAIL'")
     fun getMessagesReceived(recipient: String): Array<Message>
 

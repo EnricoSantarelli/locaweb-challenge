@@ -18,6 +18,8 @@ import br.com.fiap.locawebchallenge.modules.deleted.DeletedViewModel
 import br.com.fiap.locawebchallenge.modules.home.HomeView
 import br.com.fiap.locawebchallenge.modules.login.LoginView
 import br.com.fiap.locawebchallenge.modules.login.LoginViewModel
+import br.com.fiap.locawebchallenge.modules.mail.MailView
+import br.com.fiap.locawebchallenge.modules.mail.MailViewModel
 import br.com.fiap.locawebchallenge.modules.mails.MailsView
 import br.com.fiap.locawebchallenge.modules.mails.MailsViewModel
 import br.com.fiap.locawebchallenge.modules.register.RegisterView
@@ -77,6 +79,12 @@ class MainActivity : ComponentActivity() {
                         })) {
                             val id= it.arguments?.getInt("id")
                             DeletedView(navController, viewModel = DeletedViewModel(), id!!)
+                        }
+                        composable("mail?id={id}", arguments = listOf(navArgument(name = "id") {
+                            defaultValue = 0
+                        })) {
+                            val id= it.arguments?.getInt("id")
+                            MailView(navController, viewModel = MailViewModel(), id!!)
                         }
                     })
                 }

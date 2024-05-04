@@ -30,7 +30,7 @@ fun Header(isLogged: Boolean, screenIndex: Int = 0, navController: NavController
         Column(modifier = Modifier.padding(horizontal = 16.dp)) {
             Row(
                 modifier = Modifier
-                    .padding(start = 24.dp, top = 16.dp, bottom = 16.dp, end = 4.dp)
+                    .padding(start = 16.dp, top = 16.dp, bottom = 16.dp)
                     .fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
