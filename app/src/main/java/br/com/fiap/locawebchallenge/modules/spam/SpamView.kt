@@ -49,7 +49,7 @@ fun SpamView(navController: NavController, viewModel: SpamViewModel, id: Int) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Header(isLogged = true, screenIndex = 3, navController, id)
             Spacer(modifier = Modifier.height(16.dp))
-            TitleBanner(title = "Caixa de entrada")
+            TitleBanner(title = "Caixa de spam")
             if (messages.value != null && messages.value!!.isNotEmpty()) {
                 messages.value!!.forEach {
                     MailCard(
