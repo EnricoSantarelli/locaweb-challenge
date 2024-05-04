@@ -38,14 +38,13 @@ fun MailsView(navController: NavController, viewModel: MailsViewModel, id: Int) 
 
     val messagesRepo = MessageRepository(context)
 
-    try {
-        val receivedMessages = messagesRepo.getMessagesReceived(user.email)
+        try {
+            val receivedMessages = messagesRepo.getMessagesReceived(user.email)
 
-        viewModel.setMessages(receivedMessages)
-    } catch (e: Exception) {
-        Log.e("Error", "Erro ao obter mensagens: ${e.message}")
-    }
-
+            viewModel.setMessages(receivedMessages)
+        } catch (e: Exception) {
+            Log.e("Error", "Erro ao obter mensagens: ${e.message}")
+        }
 
     Box {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {

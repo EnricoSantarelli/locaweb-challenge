@@ -22,6 +22,8 @@ import br.com.fiap.locawebchallenge.modules.register.RegisterView
 import br.com.fiap.locawebchallenge.modules.register.RegisterViewModel
 import br.com.fiap.locawebchallenge.modules.sent.SentView
 import br.com.fiap.locawebchallenge.modules.sent.SentViewModel
+import br.com.fiap.locawebchallenge.modules.spam.SpamView
+import br.com.fiap.locawebchallenge.modules.spam.SpamViewModel
 import br.com.fiap.locawebchallenge.ui.theme.LocawebChallengeTheme
 
 class MainActivity : ComponentActivity() {
@@ -61,6 +63,12 @@ class MainActivity : ComponentActivity() {
                         })) {
                             val id= it.arguments?.getInt("id")
                             SentView(navController, viewModel = SentViewModel(), id!!)
+                        }
+                        composable("spam?id={id}", arguments = listOf(navArgument(name = "id") {
+                            defaultValue = 0
+                        })) {
+                            val id= it.arguments?.getInt("id")
+                            SpamView(navController, viewModel = SpamViewModel(), id!!)
                         }
                     })
                 }
