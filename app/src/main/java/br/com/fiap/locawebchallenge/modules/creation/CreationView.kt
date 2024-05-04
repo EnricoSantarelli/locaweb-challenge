@@ -67,10 +67,17 @@ fun CreationView(navController: NavController, viewModel: CreationViewModel, id:
                 if(recipient.value == "" || message.value == ""){
                     viewModel.setFormError("Campos obrigatórios")
                 } else {
-                    viewModel.setFormError("")
+                    val spamRegex = "\\b(offer|discount|buy now|limited time only|click here|prize|win|free|grátis|promoção|compre agora|ganhe|aproveite já)\\b".toRegex(RegexOption.IGNORE_CASE)
                     try {
-                        messagesRepo.sendMessage(message = Message(recipient = recipient.value, sender = user.email, date = Calendar.getInstance().timeInMillis, message = message.value))
+                        var status = ""
+                        if(spamRegex.containsMatchIn(message.value)){
+                            status = "SPAM"
+                        } else {
+                            status = "MAIL"
+                        }
+                        messagesRepo.sendMessage(message = Message(recipient = recipient.value, sender = user.email, date = Calendar.getInstance().timeInMillis, message = message.value, wasRead = false, status = status ))
                         navController.navigate("mails?id=${user.id}")
+                        viewModel.setFormError("")
                     } catch (e : Exception) {
                         viewModel.setFormError(e.message!!)
                     }

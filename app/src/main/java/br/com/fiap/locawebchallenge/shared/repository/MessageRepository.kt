@@ -12,11 +12,22 @@ class MessageRepository(context: Context) {
         db.sendMessage(message)
     }
 
+    fun deleteMessage(message: Message): Unit {
+        db.deleteMessage(message)
+    }
     fun getMessagesReceived(recipient: String): Array<Message> {
         return db.getMessagesReceived(recipient)
     }
 
     fun getMessagesSent(sender: String): Array<Message> {
         return db.getMessagesSent(sender)
+    }
+
+    fun getMessagesSpam(recipient: String): Array<Message> {
+        return db.getMessagesSpam(recipient)
+    }
+
+    fun getMessagesDeleted(recipient: String): Array<Message> {
+        return db.getMessagesDeleted(recipient)
     }
 }

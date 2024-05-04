@@ -20,6 +20,8 @@ import br.com.fiap.locawebchallenge.modules.mails.MailsView
 import br.com.fiap.locawebchallenge.modules.mails.MailsViewModel
 import br.com.fiap.locawebchallenge.modules.register.RegisterView
 import br.com.fiap.locawebchallenge.modules.register.RegisterViewModel
+import br.com.fiap.locawebchallenge.modules.sent.SentView
+import br.com.fiap.locawebchallenge.modules.sent.SentViewModel
 import br.com.fiap.locawebchallenge.ui.theme.LocawebChallengeTheme
 
 class MainActivity : ComponentActivity() {
@@ -53,6 +55,12 @@ class MainActivity : ComponentActivity() {
                         })) {
                             val id= it.arguments?.getInt("id")
                             CreationView(navController, viewModel = CreationViewModel(), id!!)
+                        }
+                        composable("sent?id={id}", arguments = listOf(navArgument(name = "id") {
+                            defaultValue = 0
+                        })) {
+                            val id= it.arguments?.getInt("id")
+                            SentView(navController, viewModel = SentViewModel(), id!!)
                         }
                     })
                 }
