@@ -38,13 +38,11 @@ fun SentView(navController: NavController, viewModel: SentViewModel, id: Int) {
 
     val messagesRepo = MessageRepository(context)
 
-        try {
-            val messagesSent = messagesRepo.getMessagesSent(user.email)
-
-            viewModel.setMessages(messagesRepo.getMessagesSent(user.email))
-        } catch (e: Exception) {
-            Log.i("Error", e.message!!)
-        }
+    try {
+        viewModel.setMessages(messagesRepo.getMessagesSent(user.email))
+    } catch (e: Exception) {
+        Log.i("Error", e.message!!)
+    }
     Box {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Header(isLogged = true, screenIndex = 2, navController, id)
@@ -60,11 +58,12 @@ fun SentView(navController: NavController, viewModel: SentViewModel, id: Int) {
                     )
                 }
             } else {
+                Spacer(modifier = Modifier.height(100.dp))
                 Text(
-                    text = "Caixa de envios vazia",
+                    text = "Sem emails enviados",
                     style = Typography.bodyLarge,
                     textAlign = TextAlign.Center,
-                    color = colorResource(R.color.white)
+                    color = colorResource(R.color.secondary)
                 )
             }
         }

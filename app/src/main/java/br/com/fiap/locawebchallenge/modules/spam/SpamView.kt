@@ -49,7 +49,7 @@ fun SpamView(navController: NavController, viewModel: SpamViewModel, id: Int) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Header(isLogged = true, screenIndex = 3, navController, id)
             Spacer(modifier = Modifier.height(16.dp))
-            TitleBanner(title = "Caixa de spam")
+            TitleBanner(title = "Caixa de spam vazia")
             if (messages.value != null && messages.value!!.isNotEmpty()) {
                 messages.value!!.forEach {
                     MailCard(
@@ -60,11 +60,12 @@ fun SpamView(navController: NavController, viewModel: SpamViewModel, id: Int) {
                     )
                 }
             } else {
+                Spacer(modifier = Modifier.height(100.dp))
                 Text(
                     text = "Caixa de entrada vazia",
                     style = Typography.bodyLarge,
                     textAlign = TextAlign.Center,
-                    color = colorResource(R.color.white)
+                    color = colorResource(R.color.secondary)
                 )
             }
         }

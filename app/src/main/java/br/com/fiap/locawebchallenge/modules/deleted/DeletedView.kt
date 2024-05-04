@@ -50,7 +50,7 @@ fun DeletedView(navController: NavController, viewModel: DeletedViewModel, id: I
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Header(isLogged = true, screenIndex = 4, navController, id)
             Spacer(modifier = Modifier.height(16.dp))
-            TitleBanner(title = "Caixa de entrada")
+            TitleBanner(title = "Emails excluídos")
             if (messages.value != null && messages.value!!.isNotEmpty()) {
                 messages.value!!.forEach {
                     MailCard(
@@ -61,11 +61,12 @@ fun DeletedView(navController: NavController, viewModel: DeletedViewModel, id: I
                     )
                 }
             } else {
+                Spacer(modifier = Modifier.height(100.dp))
                 Text(
-                    text = "Caixa de entrada vazia",
+                    text = "Sem emails excluídos",
                     style = Typography.bodyLarge,
                     textAlign = TextAlign.Center,
-                    color = colorResource(R.color.white)
+                    color = colorResource(R.color.secondary)
                 )
             }
         }

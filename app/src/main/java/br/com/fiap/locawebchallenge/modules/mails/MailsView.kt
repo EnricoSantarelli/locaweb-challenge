@@ -61,11 +61,12 @@ fun MailsView(navController: NavController, viewModel: MailsViewModel, id: Int) 
                     )
                 }
             } else {
+                Spacer(modifier = Modifier.height(100.dp))
                 Text(
                     text = "Caixa de entrada vazia",
                     style = Typography.bodyLarge,
                     textAlign = TextAlign.Center,
-                    color = colorResource(R.color.white)
+                    color = colorResource(R.color.secondary)
                 )
             }
         }
