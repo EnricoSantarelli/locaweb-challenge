@@ -13,6 +13,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import br.com.fiap.locawebchallenge.modules.creation.CreationView
 import br.com.fiap.locawebchallenge.modules.creation.CreationViewModel
+import br.com.fiap.locawebchallenge.modules.deleted.DeletedView
+import br.com.fiap.locawebchallenge.modules.deleted.DeletedViewModel
 import br.com.fiap.locawebchallenge.modules.home.HomeView
 import br.com.fiap.locawebchallenge.modules.login.LoginView
 import br.com.fiap.locawebchallenge.modules.login.LoginViewModel
@@ -69,6 +71,12 @@ class MainActivity : ComponentActivity() {
                         })) {
                             val id= it.arguments?.getInt("id")
                             SpamView(navController, viewModel = SpamViewModel(), id!!)
+                        }
+                        composable("deleted?id={id}", arguments = listOf(navArgument(name = "id") {
+                            defaultValue = 0
+                        })) {
+                            val id= it.arguments?.getInt("id")
+                            DeletedView(navController, viewModel = DeletedViewModel(), id!!)
                         }
                     })
                 }
