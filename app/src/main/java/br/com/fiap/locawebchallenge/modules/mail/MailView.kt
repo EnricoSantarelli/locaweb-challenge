@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -26,6 +27,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.fiap.locawebchallenge.R
 import br.com.fiap.locawebchallenge.shared.composables.BackBtn
+import br.com.fiap.locawebchallenge.shared.composables.DefaultBtn
+import br.com.fiap.locawebchallenge.shared.composables.DefaultTxtField
 import br.com.fiap.locawebchallenge.shared.composables.TitleBanner
 import br.com.fiap.locawebchallenge.shared.repository.MessageRepository
 import br.com.fiap.locawebchallenge.shared.repository.UserRepository
@@ -48,90 +51,114 @@ fun MailView(navController: NavController, viewModel: MailViewModel, id: Int, us
     }
 
     Box {
-        Column {
-            BackBtn(navController)
-            Spacer(modifier = Modifier.height(32.dp))
-            Column(Modifier.padding(horizontal = 16.dp)) {
-                Row {
-                    Text(
-                        "DE: ", style = Typography.bodyLarge.copy(fontSize = 16.sp),
-                        color = colorResource(
-                            id = R.color.secondary
-                        )
-                    )
-                    if (message.value != null) {
-                        Text(
-                            message.value!!.sender,
-                            style = Typography.bodyLarge.copy(fontSize = 16.sp),
-
-                            color = colorResource(
-                                id = R.color.secondary
-                            )
-                        )
-                    }
-                }
-                Spacer(modifier = Modifier.height(8.dp))
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxHeight(), verticalArrangement = Arrangement.SpaceBetween) {
+            Column {
+                BackBtn(navController)
+                Spacer(modifier = Modifier.height(32.dp))
+                Column(Modifier.padding(horizontal = 16.dp)) {
                     Row {
                         Text(
-                            "PARA: ", style = Typography.bodyLarge.copy(fontSize = 16.sp),
+                            "DE: ", style = Typography.bodyLarge.copy(fontSize = 16.sp),
                             color = colorResource(
                                 id = R.color.secondary
                             )
                         )
                         if (message.value != null) {
                             Text(
-                                message.value!!.recipient,
+                                message.value!!.sender,
                                 style = Typography.bodyLarge.copy(fontSize = 16.sp),
+
                                 color = colorResource(
                                     id = R.color.secondary
                                 )
                             )
                         }
                     }
-                    if (message.value != null && (message.value!!.status != "DELETED" && user.email == message.value!!.recipient)) {
-                        Log.i("WHY", message.value!!.status)
-                        Log.i("WHY", message.value!!.recipient)
-                        Log.i("WHY", user.email)
-                        IconButton(onClick = {
-                            try {
-                                messagesRepo.deleteMessage(id)
-                                navController.popBackStack()
-                            } catch (e: Exception) {
-                                Log.e("Error", "${e.message}")
-                            }
-                        }) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.trash_icon),
-                                contentDescription = "Trash icon",
-                                tint = colorResource(id = R.color.secondary)
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Row {
+                            Text(
+                                "PARA: ", style = Typography.bodyLarge.copy(fontSize = 16.sp),
+                                color = colorResource(
+                                    id = R.color.secondary
+                                )
                             )
+                            if (message.value != null) {
+                                Text(
+                                    message.value!!.recipient,
+                                    style = Typography.bodyLarge.copy(fontSize = 16.sp),
+                                    color = colorResource(
+                                        id = R.color.secondary
+                                    )
+                                )
+                            }
                         }
-                    } else {
-                        Spacer(modifier = Modifier.height(16.dp))
+                        if (message.value != null && message.value!!.status == "DELETED") {
+                            IconButton(onClick = {
+                                try {
+                                    messagesRepo.deleteMessageForce(message.value!!)
+                                    navController.popBackStack()
+                                } catch (e: Exception) {
+                                    Log.e("Error", "${e.message}")
+                                }
+                            }) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.trash_icon),
+                                    contentDescription = "Trash icon",
+                                    tint = colorResource(id = R.color.secondary)
+                                )
+                            }
+                        }
+                        if (message.value != null && (message.value!!.status != "DELETED" && user.email == message.value!!.recipient)) {
+                            IconButton(onClick = {
+                                try {
+                                    messagesRepo.deleteMessage(id)
+                                    navController.popBackStack()
+                                } catch (e: Exception) {
+                                    Log.e("Error", "${e.message}")
+                                }
+                            }) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.trash_icon),
+                                    contentDescription = "Trash icon",
+                                    tint = colorResource(id = R.color.secondary)
+                                )
+                            }
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(2.dp)
+                            .background(color = colorResource(R.color.gray))
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    if (message.value != null) {
+                        Text(
+                            message.value!!.message,
+                            style = Typography.labelSmall,
+                            color = colorResource(
+                                id = R.color.primary
+                            )
+                        )
                     }
                 }
-                Spacer(modifier = Modifier.height(8.dp))
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(2.dp)
-                        .background(color = colorResource(R.color.gray))
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                if (message.value != null) {
-                    Text(
-                        message.value!!.message,
-                        style = Typography.labelSmall,
-                        color = colorResource(
-                            id = R.color.primary
-                        )
-                    )
+            }
+            if (message.value != null && (message.value!!.status != "SPAM" && message.value!!.status != "DELETED" && user.email == message.value!!.recipient)) {
+                DefaultBtn(title = "Mandar para spam") {
+                    try {
+                        messagesRepo.setSpam(id)
+                        navController.popBackStack()
+                    } catch (e: Exception) {
+                        Log.e("Error", "${e.message}")
+                    }
                 }
+                Spacer(modifier = Modifier.height(2.dp))
             }
         }
     }

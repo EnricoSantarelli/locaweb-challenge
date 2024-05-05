@@ -19,6 +19,14 @@ class MessageRepository(context: Context) {
         db.deleteMessage(id)
     }
 
+    fun deleteMessageForce(message: Message){
+        db.deleteMessageForce(message)
+    }
+
+    fun setSpam(id: Int){
+        db.setSpam(id)
+    }
+
     fun getMessage(id: Int): Message {
         return db.getMessage(id)
     }
