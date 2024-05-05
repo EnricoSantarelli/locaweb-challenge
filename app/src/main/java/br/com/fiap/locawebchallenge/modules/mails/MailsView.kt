@@ -3,9 +3,12 @@ package br.com.fiap.locawebchallenge.modules.mails
 import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -20,6 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import br.com.fiap.locawebchallenge.R
+import br.com.fiap.locawebchallenge.shared.composables.DefaultBtn
 import br.com.fiap.locawebchallenge.shared.composables.Header
 import br.com.fiap.locawebchallenge.shared.composables.MailCard
 import br.com.fiap.locawebchallenge.shared.composables.TitleBanner
@@ -45,23 +49,56 @@ fun MailsView(navController: NavController, viewModel: MailsViewModel, id: Int) 
         Log.e("Error", "Erro ao obter mensagens: ${e.message}")
     }
 
+    val showUnreadOnly = viewModel.showUnreadOnly.observeAsState()
+
     Box {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Header(isLogged = true, screenIndex = 1, navController, id)
             Spacer(modifier = Modifier.height(16.dp))
             TitleBanner(title = "Caixa de entrada")
+            Spacer(modifier = Modifier.height(8.dp))
+            Row {
+                if(showUnreadOnly.value!!){
+                    DefaultBtn(title = "Exibir todas") {
+                        viewModel.setShowUnreadOnly(!showUnreadOnly.value!!)
+                    }
+                } else {
+                    DefaultBtn(title = "Exibir não lidas") {
+                        viewModel.setShowUnreadOnly(!showUnreadOnly.value!!)
+                    }
+                }
+            }
             if (messages.value != null && messages.value!!.isNotEmpty()) {
-                messages.value!!.forEach {
-                    MailCard(
-                        sender = it.sender,
-                        message = it.message,
-                        date = it.date,
-                        wasRead = it.wasRead,
-                        id = it.id,
-                        navController= navController,
-                        user = user,
-                        recipient = it.recipient
-                    )
+                if (showUnreadOnly.value!!) {
+                    Log.i("NAO LIDAS", "TESTE")
+                    messages.value!!.forEach {
+                        if (!it.wasRead) {
+                            Log.i("NAO LIDAS", "ENTROU")
+                            MailCard(
+                                sender = it.sender,
+                                message = it.message,
+                                date = it.date,
+                                wasRead = it.wasRead,
+                                id = it.id,
+                                navController = navController,
+                                user = user,
+                                recipient = it.recipient
+                            )
+                        }
+                    }
+                } else {
+                    messages.value!!.forEach {
+                            MailCard(
+                                sender = it.sender,
+                                message = it.message,
+                                date = it.date,
+                                wasRead = it.wasRead,
+                                id = it.id,
+                                navController = navController,
+                                user = user,
+                                recipient = it.recipient
+                            )
+                    }
                 }
             } else {
                 Spacer(modifier = Modifier.height(100.dp))

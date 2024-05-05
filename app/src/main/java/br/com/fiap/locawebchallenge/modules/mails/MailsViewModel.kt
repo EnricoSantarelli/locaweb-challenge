@@ -12,4 +12,11 @@ class MailsViewModel : ViewModel() {
     fun setMessages(value: Array<Message>){
         _messages.value = value
     }
+
+    private val _showUnreadOnly = MutableLiveData<Boolean>(false)
+    val showUnreadOnly : LiveData<Boolean> = _showUnreadOnly
+
+    fun setShowUnreadOnly(value: Boolean){
+        _showUnreadOnly.value = value
+    }
 }
