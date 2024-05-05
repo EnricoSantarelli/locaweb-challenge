@@ -47,44 +47,48 @@ class MainActivity : ComponentActivity() {
                         composable("register") {
                             RegisterView(navController, viewModel = RegisterViewModel())
                         }
-                        composable("login"){
+                        composable("login") {
                             LoginView(navController, viewModel = LoginViewModel())
                         }
                         composable("mails?id={id}", arguments = listOf(navArgument(name = "id") {
                             defaultValue = 0
-                        })){
+                        })) {
                             val id = it.arguments?.getInt("id")
                             MailsView(navController, viewModel = MailsViewModel(), id!!)
                         }
                         composable("creation?id={id}", arguments = listOf(navArgument(name = "id") {
                             defaultValue = 0
                         })) {
-                            val id= it.arguments?.getInt("id")
+                            val id = it.arguments?.getInt("id")
                             CreationView(navController, viewModel = CreationViewModel(), id!!)
                         }
                         composable("sent?id={id}", arguments = listOf(navArgument(name = "id") {
                             defaultValue = 0
                         })) {
-                            val id= it.arguments?.getInt("id")
+                            val id = it.arguments?.getInt("id")
                             SentView(navController, viewModel = SentViewModel(), id!!)
                         }
                         composable("spam?id={id}", arguments = listOf(navArgument(name = "id") {
                             defaultValue = 0
                         })) {
-                            val id= it.arguments?.getInt("id")
+                            val id = it.arguments?.getInt("id")
                             SpamView(navController, viewModel = SpamViewModel(), id!!)
                         }
                         composable("deleted?id={id}", arguments = listOf(navArgument(name = "id") {
                             defaultValue = 0
                         })) {
-                            val id= it.arguments?.getInt("id")
+                            val id = it.arguments?.getInt("id")
                             DeletedView(navController, viewModel = DeletedViewModel(), id!!)
                         }
-                        composable("mail?id={id}", arguments = listOf(navArgument(name = "id") {
-                            defaultValue = 0
-                        })) {
-                            val id= it.arguments?.getInt("id")
-                            MailView(navController, viewModel = MailViewModel(), id!!)
+                        composable(
+                            "mail?id={id}&userId={userId}",
+                            arguments = listOf(navArgument(name = "id") {
+                                defaultValue = 0
+                            }, navArgument(name = "userId") { defaultValue = 0 })
+                        ) {
+                            val id = it.arguments?.getInt("id")
+                            val userId = it.arguments?.getInt("userId")
+                            MailView(navController, viewModel = MailViewModel(), id!!, userId!!)
                         }
                     })
                 }

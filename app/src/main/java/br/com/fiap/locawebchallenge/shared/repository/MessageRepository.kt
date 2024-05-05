@@ -3,7 +3,6 @@ package br.com.fiap.locawebchallenge.shared.repository
 import android.content.Context
 import br.com.fiap.locawebchallenge.shared.db.SQLiteDb
 import br.com.fiap.locawebchallenge.shared.models.Message
-import br.com.fiap.locawebchallenge.shared.models.User
 
 class MessageRepository(context: Context) {
     private val db = SQLiteDb.getDatabase(context).messageDAO()
@@ -12,12 +11,12 @@ class MessageRepository(context: Context) {
         db.sendMessage(message)
     }
 
-    fun visualize(id: Long): Unit {
+    fun visualize(id: Int): Unit {
         db.visualize(id)
     }
 
-    fun deleteMessage(message: Message): Unit {
-        db.deleteMessage(message)
+    fun deleteMessage(id: Int): Unit {
+        db.deleteMessage(id)
     }
 
     fun getMessage(id: Int): Message {

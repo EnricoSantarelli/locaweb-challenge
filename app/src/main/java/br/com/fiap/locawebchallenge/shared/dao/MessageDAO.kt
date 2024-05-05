@@ -12,11 +12,11 @@ interface MessageDAO {
     @Insert
     fun sendMessage(message: Message)
 
-    @Delete
-    fun deleteMessage(message: Message)
+    @Query("UPDATE tbl_message SET status = 'DELETED' WHERE id=:id")
+    fun deleteMessage(id: Int)
 
     @Query("UPDATE tbl_message SET wasRead = 1 WHERE id=:id")
-    fun visualize(id: Long): Unit
+    fun visualize(id: Int): Unit
 
     @Query("SELECT * FROM tbl_message WHERE id = :id")
     fun getMessage(id: Int): Message
@@ -24,7 +24,7 @@ interface MessageDAO {
     @Query("SELECT * FROM tbl_message WHERE recipient = :recipient AND status = 'MAIL'")
     fun getMessagesReceived(recipient: String): Array<Message>
 
-    @Query("SELECT * FROM tbl_message WHERE sender = :sender")
+    @Query("SELECT * FROM tbl_message WHERE sender = :sender AND status != 'DELETED'")
     fun getMessagesSent(sender: String): Array<Message>
 
     @Query("SELECT * FROM tbl_message WHERE recipient = :recipient AND status = 'SPAM'")

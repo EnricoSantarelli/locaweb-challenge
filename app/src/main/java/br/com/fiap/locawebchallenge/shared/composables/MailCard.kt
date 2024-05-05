@@ -40,7 +40,7 @@ fun MailCard(
     message: String,
     date: Long,
     wasRead: Boolean,
-    id: Long,
+    id: Int,
     navController: NavController,
     user: User
 ) {
@@ -56,7 +56,7 @@ fun MailCard(
                 if(recipient == user.email){
                     messagesRepo.visualize(id)
                 }
-                navController.navigate("mail?id=$id")
+                navController.navigate("mail?id=$id&userId=${user.id}")
             } catch (e: Exception) {
                 Log.i("Error", e.message!!)
             }
@@ -93,7 +93,7 @@ fun MailCard(
                         id = R.color.primary
                     )
                 )
-                if (!wasRead) {
+                if (!wasRead && recipient == user.email) {
                     Row(
                         horizontalArrangement = Arrangement.End,
                         modifier = Modifier.fillMaxWidth()
