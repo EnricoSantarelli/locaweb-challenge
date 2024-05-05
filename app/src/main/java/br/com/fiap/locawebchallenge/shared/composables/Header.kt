@@ -6,12 +6,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -24,6 +24,7 @@ import androidx.navigation.NavController
 import br.com.fiap.locawebchallenge.R
 import br.com.fiap.locawebchallenge.ui.theme.Typography
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Header(isLogged: Boolean, screenIndex: Int = 0, navController: NavController? = null, id: Int = 0) {
     Box {
@@ -35,11 +36,25 @@ fun Header(isLogged: Boolean, screenIndex: Int = 0, navController: NavController
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
+                if(isLogged){
+                    Surface(
+                        onClick = {
+                            navController!!.navigate("home")
+                        }
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.logo),
+                            contentDescription = "Locamail Logo",
+                            modifier = Modifier.size(48.dp)
+                        )
+                    }
+                } else {
                 Image(
                     painter = painterResource(id = R.drawable.logo),
                     contentDescription = "Locamail Logo",
                     modifier = Modifier.size(48.dp)
                 )
+                }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.End,
