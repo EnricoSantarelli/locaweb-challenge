@@ -1,5 +1,7 @@
 package br.com.fiap.locawebchallenge
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -7,10 +9,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import br.com.fiap.locawebchallenge.modules.calendar.CalendarView
+import br.com.fiap.locawebchallenge.modules.calendar.CalendarViewModel
 import br.com.fiap.locawebchallenge.modules.creation.CreationView
 import br.com.fiap.locawebchallenge.modules.creation.CreationViewModel
 import br.com.fiap.locawebchallenge.modules.deleted.DeletedView
@@ -29,6 +34,7 @@ import br.com.fiap.locawebchallenge.modules.sent.SentViewModel
 import br.com.fiap.locawebchallenge.modules.spam.SpamView
 import br.com.fiap.locawebchallenge.modules.spam.SpamViewModel
 import br.com.fiap.locawebchallenge.ui.theme.LocawebChallengeTheme
+import java.util.Calendar
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -90,9 +96,15 @@ class MainActivity : ComponentActivity() {
                             val userId = it.arguments?.getInt("userId")
                             MailView(navController, viewModel = MailViewModel(), id!!, userId!!)
                         }
+                        composable("calendar") {
+                            CalendarView(navController, viewModel = CalendarViewModel())
+                        }
                     })
                 }
             }
         }
     }
 }
+
+
+

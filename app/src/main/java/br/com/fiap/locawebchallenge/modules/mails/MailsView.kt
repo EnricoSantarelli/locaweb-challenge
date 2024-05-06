@@ -1,5 +1,7 @@
 package br.com.fiap.locawebchallenge.modules.mails
 
+import android.content.Context
+import android.content.Intent
 import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,6 +32,8 @@ import br.com.fiap.locawebchallenge.shared.composables.TitleBanner
 import br.com.fiap.locawebchallenge.shared.repository.MessageRepository
 import br.com.fiap.locawebchallenge.shared.repository.UserRepository
 import br.com.fiap.locawebchallenge.ui.theme.Typography
+import java.util.Calendar
+
 
 @Composable
 fun MailsView(navController: NavController, viewModel: MailsViewModel, id: Int) {
@@ -70,10 +74,8 @@ fun MailsView(navController: NavController, viewModel: MailsViewModel, id: Int) 
             }
             if (messages.value != null && messages.value!!.isNotEmpty()) {
                 if (showUnreadOnly.value!!) {
-                    Log.i("NAO LIDAS", "TESTE")
                     messages.value!!.forEach {
                         if (!it.wasRead) {
-                            Log.i("NAO LIDAS", "ENTROU")
                             MailCard(
                                 sender = it.sender,
                                 message = it.message,
@@ -120,6 +122,19 @@ fun MailsView(navController: NavController, viewModel: MailsViewModel, id: Int) 
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.pencil_icon),
+                contentDescription = "Pencil icon",
+                tint = colorResource(id = R.color.secondary)
+            )
+        }
+        FloatingActionButton(
+            onClick = { navController.navigate("calendar")
+            }, modifier = Modifier
+                .align(Alignment.BottomStart)
+                .padding(16.dp),
+            containerColor = colorResource(id = R.color.primary)
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.calendar_icon),
                 contentDescription = "Pencil icon",
                 tint = colorResource(id = R.color.secondary)
             )

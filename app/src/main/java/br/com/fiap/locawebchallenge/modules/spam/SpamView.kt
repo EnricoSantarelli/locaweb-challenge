@@ -87,5 +87,6 @@ fun SpamView(navController: NavController, viewModel: SpamViewModel, id: Int) {
                 tint = colorResource(id = R.color.secondary)
             )
         }
+
     }
 }

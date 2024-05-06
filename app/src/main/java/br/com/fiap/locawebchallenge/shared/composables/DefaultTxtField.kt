@@ -2,6 +2,7 @@ package br.com.fiap.locawebchallenge.shared.composables
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -41,6 +42,7 @@ fun DefaultTxtField(
             shape = RoundedCornerShape(4.dp),
             placeholder = {
                 Text(
+                    modifier = Modifier.padding(start = 6.dp),
                     text = title,
                     style = Typography.bodyLarge,
                     color = colorResource(R.color.primary)

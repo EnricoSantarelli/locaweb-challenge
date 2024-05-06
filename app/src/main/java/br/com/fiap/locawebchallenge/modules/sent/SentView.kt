@@ -85,5 +85,6 @@ fun SentView(navController: NavController, viewModel: SentViewModel, id: Int) {
                 tint = colorResource(id = R.color.secondary)
             )
         }
+
     }
 }
